@@ -7,10 +7,10 @@ case "$(uname -m)" in
 	i386 | i686 )
         cpu=386
 	;;
-	armv8 | armv8l | arm64 | aarch64 )
+	iPhone* | armv8 | armv8l | arm64 | aarch64 )
         cpu=arm64
 	;;
-	armv7l )
+	armv7l )        
         cpu=arm
 	;;
         mips64le )
