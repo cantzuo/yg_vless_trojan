@@ -43,11 +43,22 @@ awk -F ',' '$2 ~ /TIA|VIE|MSQ|BRU|SOF|ZAG|LCA|PRG|CPH|TLL|HEL|BOD|LYS|MRS|CDG|TB
 #echo "当前网络已关闭代理，继续进行……"
 #fi
 
-if timeout 3 ping -c 2 2400:3200::1 &> /dev/null; then
-echo "当前网络支持IPV4+IPV6"
-else
-echo "当前网络仅支持IPV4"
-fi
+# 增强的网络检查
+check_network() {
+    if timeout 3 ping -c 2 8.8.8.8 &> /dev/null; then
+        echo "IPv4网络可达"
+        if timeout 3 ping -c 2 2001:4860:4860::8888 &> /dev/null; then
+            echo "当前网络支持IPv4+IPv6"
+            ipv6_support=1
+        else
+            echo "当前网络仅支持IPv4"
+            ipv6_support=0
+        fi
+    else
+        echo "IPv4网络不可达，请检查网络连接"
+        exit 1
+    fi
+}
 rm -rf 6.csv 4.csv
 echo "甬哥Github项目  ：github.com/yonggekkk"
 echo "甬哥Blogger博客 ：ygkkk.blogspot.com"
