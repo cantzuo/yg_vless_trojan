@@ -52,8 +52,7 @@ cleanup() {
 
 # 下载必要文件
 download_files() {
-    local base_url="https://ghfast.top/https://raw.githubusercontent
-.com/cantzuo/yg_vless_trojan/refs/heads/main/cf"
+    local base_url="https://raw.githubusercontent.com/cantzuo/yg_vless_trojan/refs/heads/main/cf"
     
     # 使用更可靠的下载方式
     if ! curl -L -o cf --connect-timeout 15 --retry 3 "$base_url/$cpu"; then
